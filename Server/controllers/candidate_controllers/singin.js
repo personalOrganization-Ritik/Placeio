@@ -16,7 +16,9 @@ const signinCandidate = async (req, res) => {
         .json(errorResponse("Email and password required", []));
     }
 
-    const candidate = await Candidate.findOne({ email });
+    const candidate = await Candidate.findOne({ email }).populate('following').populate({
+      path: 'appliedJobs.job',
+    });
 
     if (!candidate) {
       return res
@@ -31,6 +33,7 @@ const signinCandidate = async (req, res) => {
         .status(StatusCodes.UNAUTHORIZED)
         .json(errorResponse("Invalid email or password", []));
     }
+  //  candidate.populate(appliedJobs);
     const user = candidate.toObject();
     delete user.password;
 
