@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import moment from "moment-timezone";
-import * as dotenv from 'dotenv';
+import * as dotenv from "dotenv";
 
 dotenv.config();
 
@@ -35,7 +35,7 @@ const employerSchema = new mongoose.Schema(
     mobile: {
       type: Number,
       unique: true,
-      required: [true, "Please provide mobille"],
+      required: [true, "Please provide mobile"],
       validate: {
         validator: function (value) {
           return Number.isInteger(value) && value >= 0;
@@ -54,7 +54,6 @@ const employerSchema = new mongoose.Schema(
 employerSchema.pre("save", async function () {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
-
 });
 
 employerSchema.methods.comparePassword = async function (comparablePassword) {
