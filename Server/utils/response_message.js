@@ -1,8 +1,8 @@
 export const errorResponse = (message, dataArray) => {
   const data = {
     success: false,
-    data: dataArray,
     message: message,
+    data: dataArray,
   };
 
   return data;
@@ -10,8 +10,8 @@ export const errorResponse = (message, dataArray) => {
 export const successResponse = (message, dataArray) => {
   const data = {
     success: true,
-    data: dataArray,
     message: message,
+    data: dataArray,
   };
 
   return data;
