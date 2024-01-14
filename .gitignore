@@ -1,4 +1,5 @@
 client/node_modules/
+client/
 server/node_modules/
 server/uploads/logo/
 server/uploads/photos/

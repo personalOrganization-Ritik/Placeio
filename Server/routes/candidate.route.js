@@ -2,8 +2,8 @@ import express from "express";
 import { signupCandidate } from "../controllers/candidate_controllers/signup.js";
 import { signinCandidate } from "../controllers/candidate_controllers/singin.js";
 import uploadFile from '../utils/file_upload.js'
-import { followEmployer, unFollowEmployer } from "../controllers/candidate_controllers/candidate.js";
-import { candidateAuthenticationMiddleware } from "../middleware/authentication.js";
+import { followEmployer, getAllCandidate, unFollowEmployer } from "../controllers/candidate_controllers/candidate.js";
+import { authenticationMiddleware, candidateAuthenticationMiddleware } from "../middleware/authentication.js";
 
 const candidateRouter = express.Router();
 
@@ -16,6 +16,7 @@ candidateRouter.post(
   signupCandidate
 );
 candidateRouter.get("/signin", signinCandidate);
+candidateRouter.get("/",authenticationMiddleware ,getAllCandidate);
 candidateRouter.patch("/follow/:id",candidateAuthenticationMiddleware ,followEmployer);
 candidateRouter.patch("/unfollow/:id",candidateAuthenticationMiddleware, unFollowEmployer);
 
